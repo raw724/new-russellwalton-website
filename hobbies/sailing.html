@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>Russell Walton — Sailing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,300&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a2742;
+    --bg-deep:#04162a;
+    --sea:#0e3a5e;
+    --sky:#7eb6e8;
+    --foam:#e8f1f7;
+    --sun:#ff9a3c;
+    --ink:#e8f1f7;
+    --ink-2:rgba(232,241,247,.7);
+    --grotesk:"Space Grotesk", -apple-system, system-ui, sans-serif;
+    --serif:"Fraunces", ui-serif, Georgia, serif;
+    --mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--grotesk);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+
+  .nav{position:fixed;inset:0 0 auto 0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:18px 28px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:linear-gradient(to bottom,rgba(4,22,42,.8),transparent);backdrop-filter:blur(8px)}
+  .nav-back{padding:7px 14px;border:1px solid rgba(255,255,255,.25);border-radius:99px;transition:all .2s}
+  .nav-back:hover{background:var(--foam);color:var(--bg-deep)}
+  .nav-mark{display:flex;gap:10px;align-items:center}
+  .nav-mark .ic{width:14px;height:14px;background:var(--sun);clip-path:polygon(50% 0,100% 100%,0 100%)}
+
+  /* Hero — animated horizon */
+  .hero{min-height:100vh;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:0 28px 48px}
+  .horizon{position:absolute;inset:0;z-index:0}
+  .horizon .sky{position:absolute;top:0;left:0;right:0;height:55%;background:linear-gradient(180deg,#1d4f7a,#5b9bd2 70%,#cfe7f4)}
+  .horizon .sun{position:absolute;top:18%;right:14%;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,#fff,#ffba66 60%,var(--sun));box-shadow:0 0 80px rgba(255,154,60,.6)}
+  .horizon .sea{position:absolute;bottom:0;left:0;right:0;height:55%;background:linear-gradient(180deg,#cfe7f4,var(--sea) 25%,var(--bg-deep));overflow:hidden}
+  .horizon .wave{position:absolute;left:-10%;right:-10%;height:60px;background:repeating-linear-gradient(90deg,transparent 0 30px,rgba(255,255,255,.15) 30px 32px,transparent 32px 50px);animation:wavemv 12s linear infinite}
+  .horizon .wave.w1{top:8%;opacity:.5;animation-duration:18s}
+  .horizon .wave.w2{top:22%;opacity:.4;animation-duration:14s;animation-direction:reverse}
+  .horizon .wave.w3{top:42%;opacity:.3;animation-duration:22s}
+  @keyframes wavemv{to{transform:translateX(120px)}}
+
+  /* Boat silhouette */
+  .boat{position:absolute;bottom:30%;left:50%;transform:translateX(-50%) rotate(-3deg);width:280px;animation:bob 6s ease-in-out infinite}
+  @keyframes bob{50%{transform:translateX(-50%) translateY(-8px) rotate(2deg)}}
+  .boat svg{width:100%;height:auto;filter:drop-shadow(0 12px 18px rgba(0,0,0,.35))}
+
+  .hero-text{position:relative;z-index:2}
+  .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--sun);display:inline-flex;align-items:center;gap:10px;margin-bottom:18px}
+  .kicker::before{content:"";width:32px;height:1px;background:var(--sun)}
+  .hero-text h1{font-family:var(--grotesk);font-weight:500;font-size:clamp(60px,12vw,200px);line-height:.86;letter-spacing:-.04em;text-transform:uppercase;text-shadow:0 4px 30px rgba(0,0,0,.3)}
+  .hero-text h1 .it{font-family:var(--serif);font-style:italic;font-weight:300;text-transform:none;letter-spacing:-.02em;color:var(--sun)}
+  .hero-text p{font-size:18px;line-height:1.5;max-width:50ch;margin-top:18px;color:var(--ink)}
+
+  /* Stats strip */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);background:var(--bg-deep);border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08)}
+  .stat{padding:32px 22px;border-right:1px solid rgba(255,255,255,.08);transition:background .25s}
+  .stat:last-child{border-right:0}
+  .stat:hover{background:rgba(255,154,60,.06)}
+  .stat .v{font-family:var(--grotesk);font-weight:600;font-size:64px;line-height:1;letter-spacing:-.03em;color:var(--sun)}
+  .stat .l{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);margin-top:8px}
+
+  .section{padding:120px 28px;position:relative}
+  .container{max-width:1400px;margin:0 auto}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--sun);padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.15);margin-bottom:48px;display:flex;justify-content:space-between}
+  h2.big{font-family:var(--grotesk);font-weight:500;font-size:clamp(40px,6vw,86px);line-height:.95;letter-spacing:-.03em;text-wrap:balance}
+  h2.big i{font-family:var(--serif);font-style:italic;font-weight:300;color:var(--sun)}
+
+  /* Regatta map */
+  .regattas{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid rgba(255,255,255,.15)}
+  .reg{padding:36px 24px;border-bottom:1px solid rgba(255,255,255,.15);border-right:1px solid rgba(255,255,255,.15);position:relative;transition:background .25s}
+  .reg:nth-child(2n){border-right:0}
+  .reg:hover{background:rgba(255,154,60,.06)}
+  .reg .yr{font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--sun)}
+  .reg h3{font-family:var(--grotesk);font-weight:500;font-size:36px;line-height:1.05;letter-spacing:-.02em;margin-top:12px}
+  .reg .where{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--ink-2);margin-top:6px}
+  .reg .cls{margin-top:18px;display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:6px 10px;border:1px solid rgba(255,255,255,.25);border-radius:99px}
+
+  /* Coaching block */
+  .coach{background:var(--bg-deep);padding:120px 28px}
+  .coach-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+  .coach-grid p{font-size:18px;line-height:1.55;color:var(--ink);margin-top:16px;max-width:50ch}
+  .coach-list{display:flex;flex-direction:column;gap:0}
+  .coach-list .it{padding:20px 0;border-top:1px solid rgba(255,255,255,.12);display:grid;grid-template-columns:60px 1fr;gap:18px;align-items:baseline}
+  .coach-list .it:last-child{border-bottom:1px solid rgba(255,255,255,.12)}
+  .coach-list .num{font-family:var(--mono);font-size:11px;color:var(--sun);letter-spacing:.1em}
+  .coach-list h4{font-family:var(--grotesk);font-weight:500;font-size:22px;letter-spacing:-.015em}
+  .coach-list p{font-size:14px;color:var(--ink-2);margin-top:6px;line-height:1.5}
+
+  /* Certs */
+  .certs{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+  .cert{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:8px 14px;border:1px solid rgba(255,255,255,.25);border-radius:99px;transition:all .25s}
+  .cert:hover{background:var(--sun);border-color:var(--sun);color:var(--bg-deep)}
+
+  footer{padding:24px 28px;display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);border-top:1px solid rgba(255,255,255,.08);flex-wrap:wrap;gap:8px}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.7,.3,1),transform .8s cubic-bezier(.2,.7,.3,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  @media (max-width:860px){
+    .nav{padding:14px 16px}
+    .stats{grid-template-columns:1fr 1fr}
+    .stat{border-bottom:1px solid rgba(255,255,255,.08)}
+    .stat .v{font-size:44px}
+    .regattas{grid-template-columns:1fr}
+    .reg{border-right:0}
+    .coach-grid{grid-template-columns:1fr;gap:40px}
+    .boat{width:200px}
+    .horizon .sun{width:90px;height:90px}
+    .section,.coach{padding:80px 20px}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-mark"><span class="ic"></span> Russell Walton · Sailing</div>
+  <a class="nav-back" href="../index.html">← Back to CV</a>
+</nav>
+
+<header class="hero">
+  <div class="horizon" id="horizon">
+    <div class="sky"></div>
+    <div class="sun"></div>
+    <div class="sea">
+      <div class="wave w1"></div>
+      <div class="wave w2"></div>
+      <div class="wave w3"></div>
+    </div>
+    <div class="boat" id="boat">
+      <svg viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+        <!-- sail -->
+        <path d="M100 10 L165 150 L100 150 Z" fill="#fff"/>
+        <path d="M100 10 L100 150 L70 150 Z" fill="#ff9a3c"/>
+        <line x1="100" y1="10" x2="100" y2="160" stroke="#1a1a1a" stroke-width="2"/>
+        <!-- hull -->
+        <path d="M30 165 L170 165 L150 195 L50 195 Z" fill="#1a1a1a"/>
+        <path d="M40 165 L160 165 L145 178 L55 178 Z" fill="#ff9a3c"/>
+      </svg>
+    </div>
+  </div>
+  <div class="hero-text">
+    <span class="kicker">Hobby № 01 — Sailing</span>
+    <h1>On the <i>line.</i></h1>
+    <p>Hobie 16 and ILCA racing — Worlds, Europeans, Nationals. Senior RYA Instructor on the side.</p>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="stat"><div class="v">5</div><div class="l">International regattas</div></div>
+  <div class="stat"><div class="v">2</div><div class="l">Hobie classes raced</div></div>
+  <div class="stat"><div class="v">7</div><div class="l">RYA certifications</div></div>
+  <div class="stat"><div class="v">3+</div><div class="l">Years senior instructor</div></div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="eyebrow"><span>(01) Regattas</span><span>2019 → 2026</span></div>
+    <h2 class="big reveal">Six start lines, <i>four countries.</i></h2>
+    <div class="regattas" style="margin-top:48px">
+      <div class="reg reveal" style="grid-column:span 2">
+        <span class="yr" style="color:var(--foam)">Aug 2026 · Upcoming</span>
+        <h3>Hobie 16 Europeans</h3>
+        <div class="where">Bordeaux, France</div>
+        <div class="cls">Hobie 16 · next on the calendar</div>
+      </div>
+      <div class="reg reveal">
+        <span class="yr">2025</span>
+        <h3>Hobie 16 Nationals</h3>
+        <div class="where">Poole, England</div>
+        <div class="cls">Hobie 16</div>
+      </div>
+      <div class="reg reveal">
+        <span class="yr">2024</span>
+        <h3>Hobie Europeans</h3>
+        <div class="where">Lake Garda, Italy</div>
+        <div class="cls">Hobie 16</div>
+      </div>
+      <div class="reg reveal">
+        <span class="yr">2022</span>
+        <h3>Hobie 16 Worlds</h3>
+        <div class="where">Costa Brava, Spain</div>
+        <div class="cls">Hobie 16</div>
+      </div>
+      <div class="reg reveal">
+        <span class="yr">2021</span>
+        <h3>Hobie Dragoon Europeans</h3>
+        <div class="where">Costa Brava, Spain</div>
+        <div class="cls">Hobie Dragoon</div>
+      </div>
+      <div class="reg reveal" style="grid-column:span 2">
+        <span class="yr">2019</span>
+        <h3>Hobie Dragoon Europeans</h3>
+        <div class="where">La Rochelle, France</div>
+        <div class="cls">Hobie Dragoon · my first Euros</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="coach">
+  <div class="container">
+    <div class="eyebrow"><span>(02) Coaching</span><span>RYA Senior Dinghy Instructor</span></div>
+    <div class="coach-grid">
+      <div class="reveal">
+        <h2 class="big">Teaching the <i>start</i>.</h2>
+        <p>Seasonal role since July 2021 — qualified as RYA Senior Dinghy Instructor, managing safety, equipment and lesson plans on water. Supervising students and junior instructors, adapting lessons to skill levels, and keeping it engaging and safe whatever the weather throws at us.</p>
+        <div class="certs">
+          <span class="cert">RYA Senior Instructor</span>
+          <span class="cert">RYA Dinghy Instructor</span>
+          <span class="cert">RYA Powerboat Lvl 2</span>
+          <span class="cert">RYA Competent Crew</span>
+          <span class="cert">RYA Day Skipper</span>
+          <span class="cert">RYA First Aid</span>
+          <span class="cert">RYA Safe &amp; Fun</span>
+        </div>
+      </div>
+      <div class="coach-list reveal">
+        <div class="it"><span class="num">01</span><div><h4>Safety management</h4><p>Risk assessing the bay, the wind, and the people. Calls made before the boat leaves the slipway.</p></div></div>
+        <div class="it"><span class="num">02</span><div><h4>Mentoring instructors</h4><p>Bringing junior coaches into how I run a session — debrief, coffee, clearer thinking next time.</p></div></div>
+        <div class="it"><span class="num">03</span><div><h4>Adaptive teaching</h4><p>Same syllabus, six different students, six different routes through it. The reading happens fast.</p></div></div>
+        <div class="it"><span class="num">04</span><div><h4>Engagement</h4><p>Sailing is a hard sport to fall in love with on day one. The job is to make day one fun.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Russell Walton</span>
+  <a href="../index.html">← Back to CV</a>
+  <a href="hyrox.html">Hyrox →</a>
+</footer>
+
+<script>
+  // Parallax horizon
+  const horizon = document.getElementById('horizon');
+  const boat = document.getElementById('boat');
+  window.addEventListener('mousemove', e => {
+    const px = (e.clientX/window.innerWidth - .5);
+    const py = (e.clientY/window.innerHeight - .5);
+    if (horizon) horizon.style.transform = `translate(${px*-20}px, ${py*-10}px)`;
+    if (boat) boat.style.marginLeft = `${px*30}px`;
+  });
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => e.isIntersecting && e.target.classList.add('in'));
+  }, { threshold:.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
