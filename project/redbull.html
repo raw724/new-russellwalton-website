@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>Russell Walton — Red Bull Student Marketeer Application</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --rb-blue:#001489;
+    --rb-blue-deep:#000a4a;
+    --rb-red:#db0a40;
+    --rb-yellow:#ffcc00;
+    --rb-silver:#c8cdd3;
+    --ink:#0a0a18;
+    --paper:#fff;
+    --grotesk:"Space Grotesk", -apple-system, system-ui, sans-serif;
+    --mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--rb-blue);color:var(--paper);font-family:var(--grotesk);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:200;opacity:.07;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  /* Wings backdrop pattern */
+  .bullwings-bg{
+    position:fixed;inset:-20%;pointer-events:none;z-index:0;opacity:.05;
+    background-image:radial-gradient(ellipse at 30% 20%, var(--rb-yellow) 0%, transparent 30%),
+                      radial-gradient(ellipse at 70% 80%, var(--rb-red) 0%, transparent 35%);
+    transition:transform .2s ease;
+  }
+
+  /* Nav */
+  .nav{position:fixed;inset:0 0 auto 0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:18px 28px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:linear-gradient(to bottom, rgba(0,20,137,.85), transparent);backdrop-filter:blur(8px)}
+  .nav-mark{display:flex;align-items:center;gap:10px;font-weight:600}
+  .nav-mark .dot{width:14px;height:14px;border-radius:50%;background:var(--rb-yellow);box-shadow:0 0 12px var(--rb-yellow)}
+  .nav-back{padding:7px 14px;border:1px solid rgba(255,255,255,.3);border-radius:99px;transition:all .2s}
+  .nav-back:hover{background:var(--rb-yellow);color:var(--rb-blue);border-color:var(--rb-yellow)}
+
+  /* HERO */
+  .hero{min-height:100vh;position:relative;display:grid;grid-template-columns:1.2fr 1fr;align-items:center;padding:100px 48px 40px;gap:40px;z-index:1}
+  .hero-text{position:relative;z-index:2}
+  .kicker{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--rb-yellow);margin-bottom:24px}
+  .kicker::before{content:"";width:32px;height:1px;background:var(--rb-yellow)}
+  .hero-text h1{font-family:var(--grotesk);font-weight:600;font-size:clamp(48px,7.5vw,124px);line-height:.92;letter-spacing:-.04em;text-transform:uppercase}
+  .hero-text h1 .y{color:var(--rb-yellow)}
+  .hero-text h1 .r{color:var(--rb-red)}
+  .hero-text h1 .stroke{-webkit-text-stroke:1.5px var(--paper);color:transparent}
+  .hero-text p{font-size:18px;line-height:1.5;opacity:.9;max-width:46ch;margin-top:24px}
+  .hero-cta{display:flex;gap:14px;margin-top:32px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;border-radius:99px;transition:transform .2s,box-shadow .2s}
+  .btn-y{background:var(--rb-yellow);color:var(--rb-blue);box-shadow:0 6px 20px rgba(255,204,0,.35)}
+  .btn-y:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(255,204,0,.45)}
+  .btn-o{border:1.5px solid var(--paper);color:var(--paper)}
+  .btn-o:hover{background:var(--paper);color:var(--rb-blue)}
+
+  /* HERO PORTRAIT VIDEO */
+  .hero-video-stage{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px}
+  .hero-video-frame{
+    position:relative;width:100%;max-width:340px;aspect-ratio:9/16;
+    border-radius:22px;overflow:hidden;background:#000;
+    border:1px solid rgba(255,255,255,.18);
+    box-shadow:0 30px 70px rgba(0,0,0,.55), 0 0 0 6px rgba(255,204,0,.08);
+  }
+  .hero-video-frame::before{
+    content:"";position:absolute;inset:0;pointer-events:none;z-index:3;
+    background:linear-gradient(135deg, rgba(255,204,0,.0) 60%, rgba(255,204,0,.18) 100%);
+    border-radius:22px;
+  }
+  .video-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:24px;text-align:center;background:radial-gradient(circle at 50% 35%, #1a2dad 0%, #000 85%);cursor:pointer;transition:background .3s;z-index:2}
+  .video-placeholder:hover{background:radial-gradient(circle at 50% 35%, #2540d4 0%, #000 85%)}
+  .video-placeholder .play{width:74px;height:74px;border-radius:50%;background:var(--rb-yellow);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 8px rgba(255,204,0,.18),0 0 50px rgba(255,204,0,.4);transition:transform .25s}
+  .video-placeholder:hover .play{transform:scale(1.08)}
+  .video-placeholder .play svg{width:28px;height:28px;margin-left:4px;fill:var(--rb-blue)}
+  .video-placeholder .vlabel{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--rb-yellow)}
+  .video-placeholder .vtitle{font-family:var(--grotesk);font-weight:600;font-size:20px;letter-spacing:-.02em;line-height:1.1}
+  .video-placeholder .vmeta{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--rb-silver);display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  video.actual{width:100%;height:100%;display:block;background:#000;object-fit:cover}
+  .upload-hint{text-align:center;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--rb-silver);opacity:.55}
+  .upload-hint code{background:rgba(255,255,255,.1);padding:3px 8px;border-radius:4px;color:var(--rb-yellow)}
+
+  /* Section base */
+  .section{padding:120px 48px;position:relative;z-index:1}
+  .container{max-width:1400px;margin:0 auto}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--rb-yellow);padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.15);margin-bottom:48px;display:flex;justify-content:space-between}
+  h2.big{font-family:var(--grotesk);font-weight:600;font-size:clamp(40px,6vw,86px);line-height:.95;letter-spacing:-.03em;text-transform:uppercase;text-wrap:balance}
+  h2.big .y{color:var(--rb-yellow)} h2.big .r{color:var(--rb-red)}
+
+  /* Pitch */
+  .pitch{padding-top:80px}
+  .pitch-grid{display:grid;grid-template-columns:1fr 2fr;gap:80px;align-items:start}
+  .pitch-meta{font-family:var(--mono);font-size:11px;line-height:1.7;letter-spacing:.05em;text-transform:uppercase;color:var(--rb-silver);position:sticky;top:100px}
+  .pitch-meta dt{color:var(--rb-yellow);margin-top:10px;font-weight:600}
+  .pitch-body p{font-size:20px;line-height:1.5;margin-top:18px}
+  .pitch-body p:first-child{font-size:28px;line-height:1.3;color:var(--paper)}
+  .pitch-body strong{background:var(--rb-yellow);color:var(--rb-blue);padding:0 6px;border-radius:4px;font-weight:600}
+
+  /* Why-me cards */
+  .why{background:var(--rb-blue-deep);padding:120px 48px;position:relative}
+  .why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:48px}
+  .why-card{padding:32px 24px;border:1px solid rgba(255,255,255,.15);border-radius:16px;min-height:300px;display:flex;flex-direction:column;justify-content:space-between;background:rgba(255,255,255,.03);transition:all .3s;position:relative;overflow:hidden}
+  .why-card::after{content:"";position:absolute;left:-2px;top:-2px;width:60px;height:60px;background:var(--rb-yellow);border-radius:0 0 16px 0;clip-path:polygon(0 0,100% 0,0 100%);opacity:.9}
+  .why-card .num{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--rb-yellow);position:relative;z-index:1}
+  .why-card h4{font-family:var(--grotesk);font-weight:600;font-size:28px;letter-spacing:-.02em;line-height:1.05;margin-top:60px}
+  .why-card p{font-size:14px;line-height:1.55;opacity:.8;margin-top:12px}
+  .why-card:hover{border-color:var(--rb-yellow);transform:translateY(-4px);background:rgba(255,204,0,.08)}
+
+  /* Three Words / Brand fit */
+  .triple{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rb-yellow);margin-top:48px}
+  .triple-cell{background:var(--rb-blue);padding:48px 28px;min-height:260px;display:flex;flex-direction:column;justify-content:space-between;transition:background .25s}
+  .triple-cell:hover{background:var(--rb-red)}
+  .triple-cell .num{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--rb-yellow)}
+  .triple-cell h3{font-family:var(--grotesk);font-weight:700;font-size:60px;line-height:.9;letter-spacing:-.03em;text-transform:uppercase}
+  .triple-cell p{font-size:14px;line-height:1.5;opacity:.85}
+
+  /* Plan timeline */
+  .plan{padding:120px 48px}
+  .plan-list{display:flex;flex-direction:column;gap:0;border-top:1px solid rgba(255,255,255,.15);margin-top:24px}
+  .plan-item{display:grid;grid-template-columns:120px 1fr 200px;gap:32px;padding:28px 0;border-bottom:1px solid rgba(255,255,255,.15);align-items:baseline;transition:padding .25s,background .25s;cursor:default}
+  .plan-item:hover{padding-left:16px;background:linear-gradient(to right,rgba(255,204,0,.08),transparent)}
+  .plan-item .pn{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--rb-yellow);text-transform:uppercase}
+  .plan-item h4{font-family:var(--grotesk);font-weight:500;font-size:28px;letter-spacing:-.02em;line-height:1.1}
+  .plan-item p{font-size:14px;line-height:1.5;opacity:.75;margin-top:4px}
+  .plan-item .when{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--rb-silver);text-transform:uppercase;text-align:right}
+
+  /* Outro */
+  .outro{padding:140px 48px;text-align:center;background:var(--rb-yellow);color:var(--rb-blue);position:relative;overflow:hidden}
+  .outro h2{font-family:var(--grotesk);font-weight:700;font-size:clamp(56px,11vw,180px);line-height:.85;letter-spacing:-.04em;text-transform:uppercase;text-wrap:balance}
+  .outro p{font-family:var(--mono);font-size:13px;letter-spacing:.18em;text-transform:uppercase;margin-top:30px}
+  .outro .btn-o{margin-top:30px;border-color:var(--rb-blue);color:var(--rb-blue)}
+  .outro .btn-o:hover{background:var(--rb-blue);color:var(--rb-yellow)}
+
+  footer{padding:24px 28px;display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:#000;color:var(--rb-silver);flex-wrap:wrap;gap:8px}
+
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .9s cubic-bezier(.2,.7,.3,1),transform .9s cubic-bezier(.2,.7,.3,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  @media (max-width:860px){
+    .nav{padding:14px 16px}
+    .hero{grid-template-columns:1fr;padding:90px 22px 40px;gap:32px}
+    .hero-video-frame{max-width:280px}
+    .section,.why,.plan{padding:80px 22px}
+    .pitch-grid{grid-template-columns:1fr;gap:32px}
+    .pitch-meta{position:static}
+    .why-grid{grid-template-columns:1fr;gap:14px}
+    .triple{grid-template-columns:1fr}
+    .plan-item{grid-template-columns:1fr;gap:6px}
+    .plan-item .when{text-align:left}
+    .outro{padding:80px 22px}
+  }
+</style>
+</head>
+<body>
+
+<div class="bullwings-bg" id="bullBg"></div>
+
+<nav class="nav">
+  <div class="nav-mark"><span class="dot"></span> Application · Russell Walton</div>
+  <a href="index.html" class="nav-back">← Back to CV</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-text">
+    <span class="kicker">Application — Open</span>
+    <h1>
+      <span>It gives</span><br/>
+      <span>you <span class="y">wings.</span></span><br/>
+      <span class="stroke">I'll give them</span><br/>
+      <span>campus <span class="r">vibes.</span></span>
+    </h1>
+    <p>I'm Russell — Computer Science at Exeter, Senior Sailing Instructor, Manager on Duty at Pizza Express. Three brands trust me to represent them well. I'd like the fourth to be Red Bull.</p>
+    <div class="hero-cta">
+      <a href="#pitch" class="btn btn-y">Read the pitch</a>
+      <a href="mailto:russellwalton99@icloud.com" class="btn btn-o">Get in touch</a>
+    </div>
+  </div>
+  <div class="hero-video-stage">
+    <div class="hero-video-frame">
+      <video class="actual" id="appVideo" controls playsinline preload="metadata" poster="" style="display:none">
+        <source src="application.mp4" type="video/mp4"/>
+      </video>
+      <div class="video-placeholder" id="videoPh">
+        <span class="vlabel">▶ Press play</span>
+        <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        <h3 class="vtitle">My pitch — on tape.</h3>
+        <div class="vmeta"><span>02:00</span><span>•</span><span>Filmed in Exeter</span></div>
+      </div>
+    </div>
+    <p class="upload-hint">Drop your video as <code>application.mp4</code> in the project root.</p>
+  </div>
+</header>
+
+<!-- Pitch -->
+<section class="section pitch" id="pitch">
+  <div class="container">
+    <div class="eyebrow"><span>(01) The pitch</span><span>Why me · why now</span></div>
+    <div class="pitch-grid">
+      <dl class="pitch-meta">
+        <dt>Role</dt><dd>Student Marketeer</dd>
+        <dt>Campus</dt><dd>University of Exeter</dd>
+        <dt>Available</dt><dd>Now → ongoing</dd>
+        <dt>Three words</dt><dd>Driven · Energetic · Passionate</dd>
+        <dt>Field cred</dt><dd>2 manager roles · 5 international regattas · 3 Hyrox events</dd>
+      </dl>
+      <div class="pitch-body">
+        <p>Red Bull doesn't sell a drink. It sells <strong>moments</strong>. A bull at the start line, a can on the dashboard at 3am, a wing in the legs of someone sprinting because they have to.</p>
+        <p>I've spent my life in those moments. Hobie 16 Worlds in Costa Brava. Hyrox events back-to-back. Christmas-rush shifts as Manager on Duty at Pizza Express, opening and closing a brand for hundreds of strangers each week. I know how to <strong>show up energised, every time</strong>, and how to make a room feel that way too.</p>
+        <p>Exeter campus has a sailing club, a triathlon club, a gaming society, an esports scene, and three thousand people who haven't yet met someone walking around with a fridge of cold cans on their back. I'd like to be that someone.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why me — three cards -->
+<section class="why">
+  <div class="container">
+    <div class="eyebrow"><span>(02) Why me</span><span>Three reasons</span></div>
+    <h2 class="big reveal">I already <span class="y">activate brands</span> for a living.</h2>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <span class="num">01 — Brand activation</span>
+        <h4>Two brands · two managerial roles</h4>
+        <p>Pizza Express MOD running shifts, opening/closing, owning service standards. Senior Dinghy Instructor running an RYA centre's vibe on the water. Both brands trust me with their face.</p>
+      </div>
+      <div class="why-card reveal">
+        <span class="num">02 — Reach</span>
+        <h4>Sport, society, and a campus full of triggers</h4>
+        <p>Sailing club. Hyrox community. Gaming &amp; esports. CS societies. I sit at the cross-section of three audiences Red Bull wants — and I know all the rooms personally.</p>
+      </div>
+      <div class="why-card reveal">
+        <span class="num">03 — Resilience</span>
+        <h4>Comfortable when it's loud, late, and cold</h4>
+        <p>3am restaurant close. Force 5 in Lake Garda. Hyrox sled push at minute 45. The energy is the job — I'm built for it. Every Marketeer needs to be.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Three words -->
+<section class="section">
+  <div class="container">
+    <div class="eyebrow"><span>(03) Three words</span><span>Mine — and Red Bull's</span></div>
+    <h2 class="big reveal">Driven. <span class="y">Energetic.</span> <span class="r">Passionate.</span></h2>
+    <div class="triple">
+      <div class="triple-cell">
+        <span class="num">01</span>
+        <h3>Driven.</h3>
+        <p>Two managerial roles, an honours-track Computer Science degree, and a sport that demands daily training. None of it slows me down.</p>
+      </div>
+      <div class="triple-cell">
+        <span class="num">02</span>
+        <h3>Energetic.</h3>
+        <p>A walking advert for the product. The kind of person who makes a 9am lecture queue feel like the start of a regatta.</p>
+      </div>
+      <div class="triple-cell">
+        <span class="num">03</span>
+        <h3>Passionate.</h3>
+        <p>I represent every brand I touch like it's my own — Pizza Express, the RYA, my sailing crews. Red Bull wouldn't be any different.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 90-day plan -->
+<section class="plan">
+  <div class="container">
+    <div class="eyebrow"><span>(04) First 90 days</span><span>If you say yes</span></div>
+    <h2 class="big reveal">A plan, <span class="y">not</span> a wishlist.</h2>
+    <div class="plan-list">
+      <div class="plan-item"><span class="pn">Day 01–14</span><div><h4>Map the campus</h4><p>Walk every society fair, every gym, every library at 11pm. Identify the ten rooms where Red Bull is already half-loved and the ten where it isn't yet.</p></div><span class="when">Weeks 1–2</span></div>
+      <div class="plan-item"><span class="pn">Day 15–30</span><div><h4>Sampling at the source</h4><p>Coordinate fridges into Hyrox training, Sailing Club socials, esports tournaments, and the all-nighter coding labs. Where the demand already exists.</p></div><span class="when">Weeks 3–4</span></div>
+      <div class="plan-item"><span class="pn">Day 31–60</span><div><h4>One signature event</h4><p>"Red Bull Wings Hour" — a single hour of free cans + reps at the Hyrox-style functional fitness rig in the Sports Park. High-energy, high-photo, low-cost.</p></div><span class="when">Month 2</span></div>
+      <div class="plan-item"><span class="pn">Day 61–90</span><div><h4>Hand off &amp; scale</h4><p>Recruit a sub-team of student ambassadors from the societies I'm already in. Document what works. Turn one event into a recurring fixture.</p></div><span class="when">Month 3</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Outro -->
+<section class="outro">
+  <h2 class="reveal">Let's give<br/>Exeter <em style="font-weight:400;font-style:italic">wings.</em></h2>
+  <p>Russell Walton · russellwalton99@icloud.com</p>
+  <a href="mailto:russellwalton99@icloud.com" class="btn btn-o">Get in touch →</a>
+</section>
+
+<footer>
+  <span>© 2026 Russell Walton</span>
+  <span>Unofficial application — fan submission for Red Bull Student Marketeer</span>
+  <a href="index.html">← Back to CV</a>
+</footer>
+
+<script>
+(function(){
+  // Subtle parallax on the wings backdrop
+  window.addEventListener('mousemove', e => {
+    const px = (e.clientX/window.innerWidth - .5);
+    const py = (e.clientY/window.innerHeight - .5);
+    const bg = document.getElementById('bullBg');
+    if (bg) bg.style.transform = `translate(${px*-30}px, ${py*-30}px)`;
+  });
+
+  // Video placeholder behavior — try to play actual file if it exists
+  const ph = document.getElementById('videoPh');
+  const v = document.getElementById('appVideo');
+  ph.addEventListener('click', () => {
+    v.style.display = 'block';
+    ph.style.display = 'none';
+    v.play().catch(()=>{
+      // fail silently if no file
+      ph.style.display = 'flex';
+      v.style.display = 'none';
+      alert('No video uploaded yet. Drop application.mp4 in the project root.');
+    });
+  });
+  v.addEventListener('error', () => {
+    v.style.display = 'none';
+    ph.style.display = 'flex';
+  });
+
+  // Reveal
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => e.isIntersecting && e.target.classList.add('in'));
+  }, { threshold:.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+})();
+</script>
+</body>
+</html>
