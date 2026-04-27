@@ -110,9 +110,9 @@
   .rb-cta .go:hover{transform:translateX(4px)}
 
   /* Real Red Bull can */
-  .can{justify-self:center;width:170px;height:380px;position:relative;animation:float 5s ease-in-out infinite}
+  .can{justify-self:center;width:190px;position:relative;animation:float 5s ease-in-out infinite}
   @keyframes float{50%{transform:translateY(-12px) rotate(-2deg)}}
-  .can svg{width:100%;height:100%;filter:drop-shadow(0 30px 40px rgba(0,0,0,.35))}
+  .can img{width:100%;height:auto;display:block;filter:drop-shadow(0 30px 40px rgba(0,0,0,.45))}
 
   /* Contact */
   .contact{padding:160px 32px 40px;min-height:90vh;display:flex;flex-direction:column;justify-content:space-between}
@@ -144,7 +144,7 @@
     .hb-grid{grid-template-columns:1fr}
     .edu-grid{grid-template-columns:1fr}
     .rb-cta .container{grid-template-columns:1fr;gap:40px}
-    .can{width:140px;height:300px}
+    .can{width:150px}
     .contact-grid{grid-template-columns:1fr 1fr;gap:24px}
   }
 </style>
@@ -293,54 +293,7 @@
       <a href="redbull.html" class="go">Open the application page →</a>
     </div>
     <div class="can" aria-hidden="true">
-      <svg viewBox="0 0 170 380" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="canBody" x1="0" x2="1">
-            <stop offset="0" stop-color="#0a1a6a"/>
-            <stop offset=".15" stop-color="#1f3bbf"/>
-            <stop offset=".5" stop-color="#3656d8"/>
-            <stop offset=".85" stop-color="#1f3bbf"/>
-            <stop offset="1" stop-color="#0a1a6a"/>
-          </linearGradient>
-          <linearGradient id="canTop" x1="0" x2="1">
-            <stop offset="0" stop-color="#6f6f6f"/>
-            <stop offset=".5" stop-color="#d8d8d8"/>
-            <stop offset="1" stop-color="#6f6f6f"/>
-          </linearGradient>
-          <linearGradient id="silverBand" x1="0" x2="1">
-            <stop offset="0" stop-color="#787878"/>
-            <stop offset=".5" stop-color="#e0e0e0"/>
-            <stop offset="1" stop-color="#787878"/>
-          </linearGradient>
-        </defs>
-        <!-- top rim -->
-        <ellipse cx="85" cy="14" rx="58" ry="9" fill="url(#canTop)"/>
-        <rect x="27" y="14" width="116" height="6" fill="#9a9a9a"/>
-        <ellipse cx="85" cy="20" rx="58" ry="6" fill="#444"/>
-        <!-- main body -->
-        <path d="M27 24 Q22 30 22 38 L22 340 Q22 350 28 354 L142 354 Q148 350 148 340 L148 38 Q148 30 143 24 Z" fill="url(#canBody)"/>
-        <!-- silver bottom band -->
-        <rect x="22" y="332" width="126" height="14" fill="url(#silverBand)"/>
-        <ellipse cx="85" cy="354" rx="58" ry="6" fill="#5a5a5a"/>
-        <!-- bull silhouettes (stylised, 2 charging, sun behind) -->
-        <circle cx="85" cy="170" r="38" fill="#ffd200"/>
-        <!-- left bull -->
-        <path d="M62 175 Q56 168 60 162 L66 162 Q72 156 78 162 L84 168 L84 178 Q80 184 74 184 L66 184 Q62 182 62 175 Z" fill="#a31920"/>
-        <path d="M62 162 L58 156 M66 160 L62 154" stroke="#a31920" stroke-width="2" stroke-linecap="round"/>
-        <!-- right bull (mirror) -->
-        <path d="M108 175 Q114 168 110 162 L104 162 Q98 156 92 162 L86 168 L86 178 Q90 184 96 184 L104 184 Q108 182 108 175 Z" fill="#a31920"/>
-        <path d="M108 162 L112 156 M104 160 L108 154" stroke="#a31920" stroke-width="2" stroke-linecap="round"/>
-        <!-- RED BULL wordmark -->
-        <text x="85" y="118" text-anchor="middle" font-family="Space Grotesk, Helvetica, Arial, sans-serif" font-weight="800" font-size="22" fill="#fff" letter-spacing="1">RED BULL</text>
-        <text x="85" y="234" text-anchor="middle" font-family="Space Grotesk, Helvetica, Arial, sans-serif" font-weight="600" font-size="11" fill="#fff" letter-spacing="2">ENERGY DRINK</text>
-        <!-- "Gives you wings" tagline -->
-        <text x="85" y="260" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-style="italic" font-weight="400" font-size="10" fill="#ffd200">gives you wîings</text>
-        <!-- highlight + shadow -->
-        <rect x="28" y="26" width="14" height="320" fill="rgba(255,255,255,.25)" rx="6"/>
-        <rect x="128" y="26" width="14" height="320" fill="rgba(0,0,0,.3)" rx="6"/>
-        <!-- 250 ml badge -->
-        <text x="85" y="320" text-anchor="middle" font-family="Space Grotesk, Helvetica, Arial, sans-serif" font-weight="500" font-size="9" fill="#fff" letter-spacing="1.5">250 ml</text>
-      </svg>
+      <img src="redbull-can.png" alt="Red Bull can"/>
     </div>
   </div>
 </section>
